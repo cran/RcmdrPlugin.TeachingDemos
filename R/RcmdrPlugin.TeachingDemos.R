@@ -1,6 +1,10 @@
 # Some Rcmdr dialogs for the TeachingDemos package
 
-# last modified: 18 May 2007 by J. Fox
+# last modified: 30 May 2007 by J. Fox
+
+# Note: the following function (with contributions from Richard Heiberger) 
+# can be included in any Rcmdr plug-in package to cause the package to load
+# the Rcmdr if it is not already loaded
 
 .First.lib <- function(libname, pkgname){
     if (!interactive()) return()
@@ -13,17 +17,6 @@
         Commander()
         }
     }
-
-##.First.lib <- function(libname, pkgname) {
-##  Rcmdr <- options()$Rcmdr
-##  plugins <- Rcmdr$plugins
-##  if (!match(pkgname, plugins, 0))
-##    Rcmdr$plugins <- c(plugins, pkgname)
-##  options(Rcmdr=Rcmdr)
-##
-##  Rcmdr:::closeCommander(ask=FALSE)
-##  Commander()
-##}
 
 simulateConfidenceIntervals <- function(){
     require(TeachingDemos)
@@ -254,7 +247,7 @@ slider <- function (sl.functions, sl.names, sl.mins, sl.maxs, sl.deltas,
         tkpack(fr <- tkframe(nt))
         lab <- tklabel(fr, text = sl.names[i], width = "25")
         sc <- tkscale(fr, from = sl.mins[i], to = sl.maxs[i], 
-            showvalue = T, resolution = sl.deltas[i], orient = "horiz")
+            showvalue = TRUE, resolution = sl.deltas[i], orient = "horiz")
         tkpack(lab, sc, side = "right")
         assign("sc", sc, env = slider.env)
         eval(parse(text = paste("tkconfigure(sc,variable=slider", 
