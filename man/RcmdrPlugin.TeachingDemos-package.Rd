@@ -1,6 +1,6 @@
-\name{RcmdrDemosPlugin-package}
-\alias{RcmdrDemosPlugin-package}
-\alias{RcmdrDemosPlugin}
+\name{RcmdrPlugin.TeachingDemos-package}
+\alias{RcmdrPlugin.TeachingDemos-package}
+\alias{RcmdrPlugin.TeachingDemos}
 \docType{package}
 \title{
 Install the Demos Rcmdr Plug-In
@@ -10,10 +10,10 @@ This package provides an Rcmdr "plug-in" based on the TeachingDemos package, and
 }
 \details{
 \tabular{ll}{
-Package: \tab RcmdrDemosPlugin\cr
+Package: \tab RcmdrPlugin.TeachingDemos\cr
 Type: \tab Package\cr
-Version: \tab 1.0-1\cr
-Date: \tab 2007-05-30\cr
+Version: \tab 1.0-2\cr
+Date: \tab 2007-09-03\cr
 License: \tab GPL version 2 or newer\cr
 }
 }
