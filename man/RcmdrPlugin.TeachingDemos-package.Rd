@@ -12,9 +12,9 @@ This package provides an Rcmdr "plug-in" based on the TeachingDemos package, and
 \tabular{ll}{
 Package: \tab RcmdrPlugin.TeachingDemos\cr
 Type: \tab Package\cr
-Version: \tab 1.0-5\cr
-Date: \tab 2010-05-18\cr
-License: \tab GPL (>= 2)\cr
+Version: \tab 1.0-6\cr
+Date: \tab 2012-08-28\cr
+License: \tab GPL version 2 or newer\cr
 }
 }
 

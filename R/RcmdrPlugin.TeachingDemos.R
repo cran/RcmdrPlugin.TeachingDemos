@@ -1,12 +1,12 @@
 # Some Rcmdr dialogs for the TeachingDemos package
 
-# last modified: 30 May 2007 by J. Fox
+# last modified: 2012-08-28 by J. Fox
 
 # Note: the following function (with contributions from Richard Heiberger) 
 # can be included in any Rcmdr plug-in package to cause the package to load
 # the Rcmdr if it is not already loaded
 
-.First.lib <- function(libname, pkgname){
+.onAttach <- function(libname, pkgname){
     if (!interactive()) return()
     Rcmdr <- options()$Rcmdr
     plugins <- Rcmdr$plugins
@@ -15,23 +15,25 @@
         options(Rcmdr=Rcmdr)
         closeCommander(ask=FALSE, ask.save=TRUE)
         Commander()
-        }
     }
+}
 
 simulateConfidenceIntervals <- function(){
-    require(TeachingDemos)
+    Library("TeachingDemos")
+    defaults <- list(muVar="100", sigmaVar="15", nVar="25", repsVar="50", confLevelVar=".95", sigmaKnownVar="1")
+    dialog.values <- getDialog("simulateConfidenceIntervals", defaults)
     initializeDialog(title=gettextRcmdr("Confidence Intervals for the Mean"))
-    muVar <- tclVar("100")
+    muVar <- tclVar(dialog.values$muVar)
     muEntry <- tkentry(top, width="6", textvariable=muVar)
-    sigmaVar <- tclVar("15")
+    sigmaVar <- tclVar(dialog.values$sigmaVar)
     sigmaEntry <- tkentry(top, width="6", textvariable=sigmaVar)
-    nVar <- tclVar("25")
+    nVar <- tclVar(dialog.values$nVar)
     nEntry <- tkentry(top, width="6", textvariable=nVar)
-    repsVar <- tclVar("50")
+    repsVar <- tclVar(dialog.values$repsVar)
     repsEntry <- tkentry(top, width="6", textvariable=repsVar)
-    confLevelVar <- tclVar(".95")
+    confLevelVar <- tclVar(dialog.values$confLevelVar)
     confLevelEntry <- tkentry(top, width="6", textvariable=confLevelVar)
-    sigmaKnownVar <- tclVar("1")
+    sigmaKnownVar <- tclVar(dialog.values$sigmaKnownVar)
     sigmaKnownBox <- tkcheckbutton(top, variable=sigmaKnownVar)    
     onOK <- function(){
         closeDialog()
@@ -62,12 +64,14 @@ simulateConfidenceIntervals <- function(){
             return()
             }
         sigmaKnown <- as.logical(as.numeric(tclvalue(sigmaKnownVar)))
+        putDialog("simulateConfidenceIntervals", lapply(list(muVar=mu, sigmaVar=sigma, nVar=n, repsVar=reps, 
+                                                      confLevelVar=confLevel, sigmaKnownVar=sigmaKnown), as.character))
         command <- paste("ci.examp(mean.sim = ", mu, ", sd = ", sigma, ", n = ", n, ", reps = ", reps, 
             ", conf.level = ", confLevel, ", method = ", if (sigmaKnown) '"z"' else '"t"', ")", sep="")
         doItAndPrint(command)
         tkfocus(CommanderWindow())
         }
-    OKCancelHelp(helpSubject="ci.examp")
+    OKCancelHelp(helpSubject="ci.examp", reset="simulateConfidenceIntervals")
     tkgrid(tklabel(top, text="Population mean"), muEntry, sticky="e")
     tkgrid(tklabel(top, text="Population standard deviation"), sigmaEntry, sticky="e")
     tkgrid(tklabel(top, text="Sample size"), nEntry, sticky="e")
@@ -85,13 +89,15 @@ simulateConfidenceIntervals <- function(){
     }
     
 centralLimitTheorem <- function(){
-    require(TeachingDemos)
+    Library("TeachingDemos")
     initializeDialog(title=gettextRcmdr("Central Limit Theorem"))
-    nVar <- tclVar("1")
+    defaults <- list(nVar="1", repsVar=10000, nclassVar="16")
+    dialog.values <- getDialog("centralLimitTheorem", defaults)
+    nVar <- tclVar(dialog.values$nVar)
     nEntry <- tkentry(top, width="6", textvariable=nVar)
-    repsVar <- tclVar("10000")
+    repsVar <- tclVar(dialog.values$repsVar)
     repsEntry <- tkentry(top, width="6", textvariable=repsVar)
-    nclassVar <- tclVar("16")
+    nclassVar <- tclVar(dialog.values$nclassVar)
     nclassEntry <- tkentry(top, width="6", textvariable=nclassVar)
     onOK <- function(){
         closeDialog()
@@ -110,11 +116,12 @@ centralLimitTheorem <- function(){
             errorCondition(recall=simulateConfidenceIntervals, message="Number of samples must be a positive integer.")
             return()
             }
+        putDialog("centralLimitTheorem", lapply(list(nVar=n, repsVar=reps, nclassVar=nclass), as.character))
         command <- paste("clt.examp(n = ", n, ", reps = ", reps, ", nclass =", nclass, ")", sep="")
         doItAndPrint(command)
         tkfocus(CommanderWindow())
         }
-    OKCancelHelp(helpSubject="clt.examp")
+    OKCancelHelp(helpSubject="clt.examp", reset="centralLimitTheorem")
     tkgrid(tklabel(top, text="Sample size"), nEntry, sticky="e")
     tkgrid(tklabel(top, text="Number of samples"), repsEntry, sticky="e")
     tkgrid(tklabel(top, text="Approximate number of bins for histograms"), nclassEntry, sticky="e")
@@ -216,18 +223,19 @@ slider <- function (sl.functions, sl.names, sl.mins, sl.maxs, sl.deltas,
 {
     if (!missing(no)) 
         return(as.numeric(tclvalue(get(paste("slider", no, sep = ""), 
-            env = slider.env))))
+            envir = slider.env))))
     if (!missing(set.no.value)) {
         try(eval(parse(text = paste("tclvalue(slider", set.no.value[1], 
-            ")<-", set.no.value[2], sep = "")), env = slider.env))
+            ")<-", set.no.value[2], sep = "")), envir = slider.env))
         return(set.no.value[2])
     }
     if (!exists("slider.env")) 
-        slider.env <<- new.env()
+#        slider.env <<- new.env()
+        assign("slider.env", new.env(), envir=.GlobalEnv)
     if (!missing(obj.name)) {
         if (!missing(obj.value)) 
-            assign(obj.name, obj.value, env = slider.env)
-        else obj.value <- get(obj.name, env = slider.env)
+            assign(obj.name, obj.value, envir = slider.env)
+        else obj.value <- get(obj.name, envir = slider.env)
         return(obj.value)
     }
     if (missing(title)) 
@@ -242,16 +250,16 @@ slider <- function (sl.functions, sl.names, sl.mins, sl.maxs, sl.deltas,
         sl.functions <- function(...) {
         }
     for (i in seq(sl.names)) {
-        eval(parse(text = paste("assign('slider", i, "',tclVar(sl.defaults[i]),env=slider.env)", 
+        eval(parse(text = paste("assign('slider", i, "',tclVar(sl.defaults[i]), envir=slider.env)", 
             sep = "")))
         tkpack(fr <- tkframe(nt))
         lab <- tklabel(fr, text = sl.names[i], width = "25")
         sc <- tkscale(fr, from = sl.mins[i], to = sl.maxs[i], 
             showvalue = TRUE, resolution = sl.deltas[i], orient = "horiz")
         tkpack(lab, sc, side = "right")
-        assign("sc", sc, env = slider.env)
+        assign("sc", sc, envir = slider.env)
         eval(parse(text = paste("tkconfigure(sc,variable=slider", 
-            i, ")", sep = "")), env = slider.env)
+            i, ")", sep = "")), envir = slider.env)
         sl.fun <- if (length(sl.functions) > 1) 
             sl.functions[[i]]
         else sl.functions
@@ -260,7 +268,7 @@ slider <- function (sl.functions, sl.names, sl.mins, sl.maxs, sl.deltas,
                 sl.fun, "}")))
         tkconfigure(sc, command = sl.fun)
     }
-    assign("slider.values.old", sl.defaults, env = slider.env)
+    assign("slider.values.old", sl.defaults, envir = slider.env)
     tkpack(f.but <- tkframe(nt), fill = "x")
     tkpack(tkbutton(f.but, text = "Exit", command = function() tkdestroy(nt)), 
         side = "right")
@@ -271,7 +279,7 @@ slider <- function (sl.functions, sl.names, sl.mins, sl.maxs, sl.deltas,
                 reset.function, "}")))
         tkpack(tkbutton(f.but, text = "Reset", command = function() {
             for (i in seq(sl.names)) eval(parse(text = paste("tclvalue(slider", 
-                i, ")<-", sl.defaults[i], sep = "")), env = slider.env)
+                i, ")<-", sl.defaults[i], sep = "")), envir = slider.env)
             reset.function()
         }), side = "right")
     }

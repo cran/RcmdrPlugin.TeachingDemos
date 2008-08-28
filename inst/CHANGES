@@ -13,9 +13,19 @@ Version 1.0-2
 Version 1.0-3
 
  o  Removed the Log-Exceptions: field from the DESCRIPTION file; it is not longer used.
- 
+
 Version 1.0-4
 
- o  Demonstrates use of "remove" directive in menus.txt file
- 
+ o  Cleaned up sources.
 
+ o  Added persistent dialog state and reset.
+
+ o  Added NAMESPACE file.
+
+Version 1.0-5
+
+ o  Skipped to synchronize with CRAN.
+
+Version 1.0-6
+
+ o Updated menus.txt file to demonstrate remove directive.
