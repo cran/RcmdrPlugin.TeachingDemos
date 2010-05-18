@@ -1,9 +1,13 @@
 # Some Rcmdr menus for the TeachingDemos package
 # When the plug-in is loaded, these menus are merged with the standard Rcmdr menus
 
-# last modified: 16 May 2007 by J. Fox
+# last modified: 22 July 2008 by J. Fox
 
 #   type    menu/item      operation/parent  label                              command/menu                activation    install?
+remove  normalDistributionPlot	""		""										""							""						""
+remove  tDistributionPlot		""		""										""							""						""
+remove	gammaDistributionPlot	""		""										""							""						""
+remove	discreteMenu            ""		""										""							""						""
 menu    demosMenu       topMenu         ""                                      ""                          ""                      "" 
 item    demosMenu       command         "Central limit theorem..."              centralLimitTheorem         ""                      "packageAvailable('TeachingDemos')"
 item    demosMenu       command         "Confidence interval for the mean..."   simulateConfidenceIntervals ""                      "packageAvailable('TeachingDemos')"

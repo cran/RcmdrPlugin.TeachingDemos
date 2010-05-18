@@ -13,4 +13,9 @@ Version 1.0-2
 Version 1.0-3
 
  o  Removed the Log-Exceptions: field from the DESCRIPTION file; it is not longer used.
+ 
+Version 1.0-4
+
+ o  Demonstrates use of "remove" directive in menus.txt file
+ 
 
