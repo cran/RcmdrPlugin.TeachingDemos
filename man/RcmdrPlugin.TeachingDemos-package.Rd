@@ -6,14 +6,14 @@
 Install the Demos Rcmdr Plug-In
 }
 \description{
-This package provides an Rcmdr "plug-in" based on the TeachingDemos package, and is primarily for illustrative purposes.
+Provides an Rcmdr "plug-in" based on the TeachingDemos package, and is primarily for illustrative purposes.
 }
 \details{
 \tabular{ll}{
 Package: \tab RcmdrPlugin.TeachingDemos\cr
 Type: \tab Package\cr
-Version: \tab 1.0-7\cr
-Date: \tab 2013-01-24\cr
+Version: \tab 1.1-0\cr
+Date: \tab 2016-11-11\cr
 License: \tab GPL version 2 or newer\cr
 }
 }
@@ -29,3 +29,8 @@ Maintainer: John Fox <jfox@mcmaster.ca>
 \code{\link[Rcmdr]{Rcmdr}}.
 }
 
+\examples{
+if (interactive()){ # load the Rcmdr and the plug-in
+    library(RcmdrPlugin.TeachingDemos)
+    }
+}

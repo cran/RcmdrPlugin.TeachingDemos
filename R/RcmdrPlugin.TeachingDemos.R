@@ -1,6 +1,6 @@
 # Some Rcmdr dialogs for the TeachingDemos package
 
-# last modified: 2013-01-24 by J. Fox
+# last modified: 2015-12-08 by J. Fox
 
 # Note: the following function (with contributions from Richard Heiberger and Milan Bouchet-Valat) 
 # can be included in any Rcmdr plug-in package to cause the package to load
@@ -27,7 +27,6 @@
 }
 
 simulateConfidenceIntervals <- function(){
-    Library("TeachingDemos")
     defaults <- list(muVar="100", sigmaVar="15", nVar="25", repsVar="50", confLevelVar=".95", sigmaKnownVar="1")
     dialog.values <- getDialog("simulateConfidenceIntervals", defaults)
     initializeDialog(title=gettextRcmdr("Confidence Intervals for the Mean"))
@@ -71,7 +70,7 @@ simulateConfidenceIntervals <- function(){
             errorCondition(recall=simulateConfidenceIntervals, message="Confidence level must be between 0 and 1.")
             return()
             }
-        sigmaKnown <- as.logical(as.numeric(tclvalue(sigmaKnownVar)))
+        sigmaKnown <- as.numeric(tclvalue(sigmaKnownVar))
         putDialog("simulateConfidenceIntervals", lapply(list(muVar=mu, sigmaVar=sigma, nVar=n, repsVar=reps, 
                                                       confLevelVar=confLevel, sigmaKnownVar=sigmaKnown), as.character))
         command <- paste("ci.examp(mean.sim = ", mu, ", sd = ", sigma, ", n = ", n, ", reps = ", reps, 
@@ -79,7 +78,7 @@ simulateConfidenceIntervals <- function(){
         doItAndPrint(command)
         tkfocus(CommanderWindow())
         }
-    OKCancelHelp(helpSubject="ci.examp", reset="simulateConfidenceIntervals")
+    OKCancelHelp(helpSubject="ci.examp", reset="simulateConfidenceIntervals", apply="simulateConfidenceIntervals")
     tkgrid(tklabel(top, text="Population mean"), muEntry, sticky="e")
     tkgrid(tklabel(top, text="Population standard deviation"), sigmaEntry, sticky="e")
     tkgrid(tklabel(top, text="Sample size"), nEntry, sticky="e")
@@ -129,7 +128,7 @@ centralLimitTheorem <- function(){
         doItAndPrint(command)
         tkfocus(CommanderWindow())
         }
-    OKCancelHelp(helpSubject="clt.examp", reset="centralLimitTheorem")
+    OKCancelHelp(helpSubject="clt.examp", reset="centralLimitTheorem", apply="centralLimitTheorem")
     tkgrid(tklabel(top, text="Sample size"), nEntry, sticky="e")
     tkgrid(tklabel(top, text="Number of samples"), repsEntry, sticky="e")
     tkgrid(tklabel(top, text="Approximate number of bins for histograms"), nclassEntry, sticky="e")
@@ -141,63 +140,49 @@ centralLimitTheorem <- function(){
     }
     
 flipCoin <- function(){
-    require(TeachingDemos)
-    use.rgl <- options("Rcmdr")[[1]]$use.rgl
-    if (length(use.rgl) == 0 || use.rgl) require(rgl)
-    rgl.open()
-    rgl.coin()
-    flip.rgl.coin()
+    rgl::rgl.open()
+    TeachingDemos::rgl.coin()
+    TeachingDemos::flip.rgl.coin()
     }
     
 rollDie <- function(){
-    require(TeachingDemos)
-    use.rgl <- options("Rcmdr")[[1]]$use.rgl
-    if (length(use.rgl) == 0 || use.rgl) require(rgl)
-    rgl.open()
-    rgl.die()
-    roll.rgl.die()
+    rgl::rgl.open()
+    TeachingDemos::rgl.die()
+    TeachingDemos::roll.rgl.die()
     }
     
 powerExample <- function(){
-    require(TeachingDemos)
-    power.examp()
-    run.power.examp()
+    TeachingDemos::power.examp()
+    TeachingDemos::run.power.examp()
     }
     
 correlationExample <- function(){
-    require(TeachingDemos)
-    run.cor.examp()
+    TeachingDemos::run.cor.examp()
     }
     
 linearRegressionExample <- function(){
-    require(TeachingDemos)
     put.points.demo()
     }
     
 visBinom <- function(){
-    require(TeachingDemos)
-    vis.binom()
+    TeachingDemos::vis.binom()
     }
     
 visNormal <- function(){
-    require(TeachingDemos)
-    vis.normal()
+    TeachingDemos::vis.normal()
     }
     
 vist <- function(){
-    require(TeachingDemos)
-    vis.t()
+    TeachingDemos::vis.t()
     }
     
 visGamma <- function(){
-    require(TeachingDemos)
-    vis.gamma()
+    TeachingDemos::vis.gamma()
     }
 
 run.cor.examp <- function (n = 100, seed) 
 # slightly modified by J. Fox from the TeachingDemos package
 {
-    require(TeachingDemos)
     if (!missing(seed)) {
         set.seed(seed)
     }
@@ -237,9 +222,6 @@ slider <- function (sl.functions, sl.names, sl.mins, sl.maxs, sl.deltas,
             ")<-", set.no.value[2], sep = "")), envir = getRcmdr("slider.env")))
         return(set.no.value[2])
     }
-#    if (!exists("slider.env")) 
-#        slider.env <<- new.env()
-#        assign("slider.env", new.env(), envir=.GlobalEnv)
     if (!missing(obj.name)) {
         if (!missing(obj.value)) 
             assign(obj.name, obj.value, envir = getRcmdr("slider.env"))

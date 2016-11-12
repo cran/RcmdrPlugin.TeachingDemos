@@ -1,8 +1,9 @@
-1c0870046b74b97ec08d4a6158d90a7b *DESCRIPTION
-6bbf4d32ee6c2f09c5591bd5acc6260b *NAMESPACE
-8422e4116d91d66098ea194234212211 *R/RcmdrPlugin.TeachingDemos.R
+8b983594ca13a10bbda4e5d74ce0e1ea *DESCRIPTION
+2dddd7d77600aff84709a02daeb019ed *NAMESPACE
+888ed2eb0e9e94dd768920e08359b042 *NEWS
+d860a76ab5b3ddf4af21372cdc33f164 *R/RcmdrPlugin.TeachingDemos.R
 6467784c1d22153dceae6f8ccfadb142 *R/globals.R
 1e66cff471b10de125e61233efc843bc *inst/CHANGES
 d54c34347055982dc8424c2f93afb90e *inst/etc/menus.txt
 dc908e860dacefe445591e61168742b6 *man/RcmdrPlugin.TeachingDemos-internal.Rd
-cb64098c759ca33ffb1ccab647483a08 *man/RcmdrPlugin.TeachingDemos-package.Rd
+243e349160181235636ac4a5bb730bc1 *man/RcmdrPlugin.TeachingDemos-package.Rd

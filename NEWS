@@ -1,0 +1,5 @@
+Changes to Version 1.1-0
+
+  o  General updating to conform to CRAN and newer Rcmdr conventions.
+
+For changes to earlier version see the package CHANGES file.
