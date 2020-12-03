@@ -1,6 +1,6 @@
-# last modified 2015-12-08
+# last modified 2020-12-02
 
-import(stats, Rcmdr, TeachingDemos, rgl, tkrplot)
+import(stats, Rcmdr, TeachingDemos)
 importFrom("tcltk", "tkbutton")
 importFrom("graphics", "plot", "title")
 exportPattern("^[^\\.]")

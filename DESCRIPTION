@@ -1,18 +1,19 @@
 Package: RcmdrPlugin.TeachingDemos
 Type: Package
 Title: Rcmdr Teaching Demos Plug-in
-Version: 1.1-0
-Date: 2016-11-11
+Version: 1.2-0
+Date: 2020-12-02
 Author: John Fox <jfox@mcmaster.ca>
 Maintainer: John Fox <jfox@mcmaster.ca>
-Depends: rgl, TeachingDemos (>= 2.9), tkrplot
-Imports: Rcmdr
+Depends: TeachingDemos (>= 2.9)
+Suggests: rgl, tkrplot
+Imports: Rcmdr, tcltk, graphics, stats
 Description: Provides an Rcmdr "plug-in" based on the TeachingDemos package, and is primarily for illustrative purposes.
 License: GPL (>= 2)
 Repository: CRAN
 Repository/R-Forge/Project: rcmdrtdplugin
-Repository/R-Forge/Revision: 7
-Repository/R-Forge/DateTimeStamp: 2016-11-11 20:18:51
-Date/Publication: 2016-11-12 15:47:08
+Repository/R-Forge/Revision: 10
+Repository/R-Forge/DateTimeStamp: 2020-12-02 22:07:04
+Date/Publication: 2020-12-03 15:30:03 UTC
 NeedsCompilation: no
-Packaged: 2016-11-11 20:25:35 UTC; rforge
+Packaged: 2020-12-02 22:31:13 UTC; rforge

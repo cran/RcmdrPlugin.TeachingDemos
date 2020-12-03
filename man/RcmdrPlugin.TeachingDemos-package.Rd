@@ -12,8 +12,8 @@ Provides an Rcmdr "plug-in" based on the TeachingDemos package, and is primarily
 \tabular{ll}{
 Package: \tab RcmdrPlugin.TeachingDemos\cr
 Type: \tab Package\cr
-Version: \tab 1.1-0\cr
-Date: \tab 2016-11-11\cr
+Version: \tab 1.2-0\cr
+Date: \tab 2020-12-02\cr
 License: \tab GPL version 2 or newer\cr
 }
 }
@@ -26,7 +26,7 @@ Maintainer: John Fox <jfox@mcmaster.ca>
 
 \keyword{ package }
 \seealso{
-\code{\link[Rcmdr]{Rcmdr}}.
+\code{\link[Rcmdr:Rcmdr-package]{Rcmdr}}.
 }
 
 \examples{

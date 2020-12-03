@@ -1,7 +1,7 @@
 # Some Rcmdr menus for the TeachingDemos package
 # When the plug-in is loaded, these menus are merged with the standard Rcmdr menus
 
-# last modified: 22 July 2008 by J. Fox
+# last modified: 2020-12-02 by J. Fox
 
 #   type    menu/item      operation/parent  label                              command/menu                activation    install?
 remove  normalDistributionPlot    ""		""										""							""						""
@@ -11,15 +11,15 @@ remove	discreteMenu            ""		""										""							""						""
 menu    demosMenu       topMenu         ""                                      ""                          ""                      "" 
 item    demosMenu       command         "Central limit theorem..."              centralLimitTheorem         ""                      "packageAvailable('TeachingDemos')"
 item    demosMenu       command         "Confidence interval for the mean..."   simulateConfidenceIntervals ""                      "packageAvailable('TeachingDemos')"
-item    demosMenu       command         "Power of the test"                     powerExample                ""                      "packageAvailable('TeachingDemos')"
-item    demosMenu       command         "Flip a coin"                           flipCoin                    ""                      "packageAvailable('TeachingDemos')"
-item    demosMenu       command         "Roll a die"                            rollDie                     ""                      "packageAvailable('TeachingDemos')"
+item    demosMenu       command         "Power of the test"                     powerExample                ""                      "packageAvailable('TeachingDemos') && packageAvailable('tkrplot')"
+item    demosMenu       command         "Flip a coin"                           flipCoin                    ""                      "packageAvailable('TeachingDemos') && packageAvailable('rgl')"
+item    demosMenu       command         "Roll a die"                            rollDie                     ""                      "packageAvailable('TeachingDemos') && packageAvailable('rgl')"
 item    demosMenu       command         "Simple linear regression"              linearRegressionExample     ""                      "packageAvailable('TeachingDemos')"
-item    demosMenu       command         "Simple correlation"                    correlationExample          ""                      "packageAvailable('TeachingDemos')"
+item    demosMenu       command         "Simple correlation"                    correlationExample          ""                      "packageAvailable('TeachingDemos')  && packageAvailable('tkrplot')"
 item    topMenu         cascade         "Demos"                                 demosMenu                   ""                      "packageAvailable('TeachingDemos')"
 menu    visualMenu      distributionsMenu ""                                    ""                          ""                  ""
-item    visualMenu      command         "Binomial distributions"                visBinom                    ""                      "packageAvailable('TeachingDemos')"
-item    visualMenu      command         "Normal distributions"                  visNormal                   ""                      "packageAvailable('TeachingDemos')" 
-item    visualMenu      command         "t distributions"                       vist                        ""                      "packageAvailable('TeachingDemos')"
-item    visualMenu      command         "Gamma distributions"                   visGamma                    ""                      "packageAvailable('TeachingDemos')"
-item    distributionsMenu   cascade     "Visualize distributions"               visualMenu                  ""                      "packageAvailable('TeachingDemos')"
+item    visualMenu      command         "Binomial distributions"                visBinom                    ""                      "packageAvailable('TeachingDemos')  && packageAvailable('tkrplot')"
+item    visualMenu      command         "Normal distributions"                  visNormal                   ""                      "packageAvailable('TeachingDemos')  && packageAvailable('tkrplot')" 
+item    visualMenu      command         "t distributions"                       vist                        ""                      "packageAvailable('TeachingDemos')  && packageAvailable('tkrplot')"
+item    visualMenu      command         "Gamma distributions"                   visGamma                    ""                      "packageAvailable('TeachingDemos')  && packageAvailable('tkrplot')"
+item    distributionsMenu   cascade     "Visualize distributions"               visualMenu                  ""                      "packageAvailable('TeachingDemos')  && packageAvailable('tkrplot')"
